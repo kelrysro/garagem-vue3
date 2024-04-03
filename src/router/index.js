@@ -15,6 +15,11 @@ const router = createRouter({
       name: "categorias",
       component: CategoriaView,
     },
+    {
+      path: "/acessorios",
+      name: "acessorios",
+      component: AcessoriosView,
+    },
   ],
 });
 
