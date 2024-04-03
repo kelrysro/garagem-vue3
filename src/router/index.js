@@ -18,8 +18,14 @@ const router = createRouter({
     {
       path: "/acessorios",
       name: "acessorios",
-      component: AcessoriosView,
+      component: AcessorioView,
     },
+    {
+      path: "/cores",
+      name: "cores",
+      component: CoresView,
+    },
+
   ],
 });
 
