@@ -1,15 +1,16 @@
 import axios from "axios";
-export default class CorApi {
-  async buscarTodasAsCor() {
+
+export default class CoresApi {
+  async buscarTodasAsCores() {
     const { data } = await axios.get("/cores/");
     return data.results;
   }
-  async adicionarCor(cores) {
-    const { data } = await axios.post("/cores/", cores);
+  async adicionarCor(cor) {
+    const { data } = await axios.post("/cores/", cor);
     return data.results;
   }
-  async atualizarCor(cores) {
-    const { data } = await axios.put(`/cores/${cores.id}/`, cores);
+  async atualizarCor(cor) {
+    const { data } = await axios.put(`/cores/${cor.id}/`, cor);
     return data.results;
   }
   async excluirCor(id) {

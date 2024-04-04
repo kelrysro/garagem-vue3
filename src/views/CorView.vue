@@ -1,14 +1,14 @@
 <script setup>
 import { ref, reactive, onMounted } from "vue";
-import CorApi from "@/api/cores";
-const coresApi = new CorApi();
+import CoresApi from "@/api/cores";
+const coresApi = new CoresApi();
 
-const defaultCor = { id: null, nome: ""};
+const defaultCor = { id: null, nome: "", site: "" };
 const cores = ref([]);
 const cor = reactive({ ...defaultCor });
 
 onMounted(async () => {
-  cores.value = await coresApi.buscarTodasAsCor();
+  cores.value = await coresApi.buscarTodasAsCores();
 });
 
 function limpar() {
@@ -21,7 +21,7 @@ async function salvar() {
   } else {
     await coresApi.adicionarCor(cor);
   }
-  cores.value = await coresApi.buscarTodasAsCor();
+  cores.value = await coresApi.buscarTodasAsCores();
   limpar();
 }
 
@@ -31,7 +31,7 @@ function editar(cor_para_editar) {
 
 async function excluir(id) {
   await coresApi.excluirCor(id);
-  cores.value = await coresApi.buscarTodasAsCor();
+  cores.value = await coresApi.buscarTodasAsCores();
   limpar();
 }
 </script>
@@ -41,6 +41,7 @@ async function excluir(id) {
   <hr />
   <div class="form">
     <input type="text" v-model="cor.nome" placeholder="Nome" />
+
     <button @click="salvar">Salvar</button>
     <button @click="limpar">Limpar</button>
   </div>
@@ -48,11 +49,9 @@ async function excluir(id) {
   <ul>
     <li v-for="cor in cores" :key="cor.id">
       <span @click="editar(cor)">
-        ({{ cor.id }}) - {{ cor.nome }} -
+        ({{ cor.id }}) - {{ cor.nome }} - {{ cor.site }} -
       </span>
       <button @click="excluir(cor.id)">X</button>
     </li>
   </ul>
 </template>
-
-<style></style>
